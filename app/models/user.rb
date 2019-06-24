@@ -12,6 +12,13 @@ class User < ApplicationRecord
 		uniqueness: { case_sensitive: false }				#email存在最长为240个字符，邮件地址符合规则，具有大小写敏感唯一性
 	validates :password,presence: true, length: { minimum: 6}
 
-	has_secure_password		
+	has_secure_password	
+
+	# 返回指定字符串的哈希摘要
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end	
 
 end
