@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   #get 'users/new'
 
   resources :users
+  resources :account_activations, only:[:edit]
   #resources :users
   #get 'static_pages/home'
   #get 'static_pages/help'
